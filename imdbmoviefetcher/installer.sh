@@ -6,6 +6,7 @@ printf "You don't have the sufficient privilege to install this. Are you not roo
 exit 192
 fi
 install -Dm755 imdb-mf.sh /usr/local/bin/imdb-mf
+install -Dm755 imdb-mf.conf /etc/imdb-mf.conf
 if [ $? -eq 0 ]
 then
 printf "Installation completed. Execute \"imdb-mf -h\" for more info\n"
