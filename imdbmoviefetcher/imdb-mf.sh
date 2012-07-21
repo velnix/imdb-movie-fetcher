@@ -1,14 +1,14 @@
 #!/bin/bash
-#IMDB Movie fetcher
-#an IMDB movie data fetcher developed by Unnikrishnan.A
+#Movie fetcher
+#Movie data fetcher developed by Unnikrishnan.A
 #unnikrishnan.a@gmail.com
-#http://imdbmoviefetche.sourceforge.net/
-#version 4.0
+#http://moviefetcher.mutexes.org/
+#version 5.0
 shopt -s -o nounset
 #Global variable declarations
-declare -rx MYSITE="http://imdbmoviefetche.sourceforge.net/"
+declare -rx MYSITE="http://moviefetcher.mutexes.org/"
 declare -rx SCRIPT=${0##*/}
-declare -rx VERSION="4.0"
+declare -rx VERSION="5.0"
 declare URL
 declare TITLE
 declare YEAR
