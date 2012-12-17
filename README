@@ -32,6 +32,8 @@ Usage
    -v : gives the version of the script
    -h : shows the help page
    -t [arg] : Pass the movie title as argument. It is recommended to quote the name as shown in the example below 
+   -p : download movie poster 
+   -m : output in machine-readable format, easy for subsequent parsing 
 
    Example : 
    imdb-mf -t "startship troopers"
