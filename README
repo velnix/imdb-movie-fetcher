@@ -1,4 +1,4 @@
-IMDB movie fetcher version 4.1
+IMDB movie fetcher version 4.2
 =====================
 
 Command line tool to search and get details about movies. 
@@ -36,7 +36,7 @@ Usage
    -m : output in machine-readable format, easy for subsequent parsing 
 
    Example : 
-   imdb-mf -t "startship troopers"
+   imdb-mf -t "starship troopers"
  
    Send your feedback to unnikrishnan.a@gmail.com
-   Visit: http://imdbmoviefetche.sourceforge.net/
+   Visit: http://prj.mutexes.org/projects/imdbmoviefetcher

@@ -1,14 +1,15 @@
 #!/bin/bash
 #Movie fetcher
-#Movie data fetcher developed by Unnikrishnan.A
-#unnikrishnan.a@gmail.com
-#http://moviefetcher.mutexes.org/
-#version 5.0
+#Movie data fetcher developed by Unni <unnikrishnan.a@gmail.com>
+#Code to fetch poster, machine readable output and bug fixes by
+#Mikhail Fedotov <anyremote@mail.ru>
+#http://prj.mutexes.org/projects/imdbmoviefetcher
+#version 4.2
 shopt -s -o nounset
 #Global variable declarations
-declare -rx MYSITE="http://moviefetcher.mutexes.org/"
+declare -rx MYSITE="http://prj.mutexes.org/projects/imdbmoviefetcher"
 declare -rx SCRIPT=${0##*/}
-declare -rx VERSION="5.0"
+declare -rx VERSION="4.2"
 declare URL
 declare TITLE
 declare YEAR
@@ -139,7 +140,7 @@ h) cat << EOF
    -m : Output in machine-readable format, easy for subsequent parsing 
 
    Example : 
-   $SCRIPT -t "startship troopers"
+   $SCRIPT -t "cars"
  
    Bugs, feature requests etc : $MYSITE
 
@@ -241,14 +242,14 @@ then
 PLOT=`echo $PLOT | tr -d '\n'`
 fi
 #print everything
-printf "${COLOR_START}${TITLE_COLOR_TAG}Title${COLOR_END}      : ${COLOR_START}${DATA_COLOR_TAG}$TITLE${COLOR_END}\n"
+printf "\n${COLOR_START}${TITLE_COLOR_TAG}Title${COLOR_END}      : ${COLOR_START}${DATA_COLOR_TAG}$TITLE${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Year${COLOR_END}       : ${COLOR_START}${DATA_COLOR_TAG}$YEAR${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Rating${COLOR_END}     : ${COLOR_START}${DATA_COLOR_TAG}$RATING${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Director${COLOR_END}   : ${COLOR_START}${DATA_COLOR_TAG}$DIRECTOR${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Genres${COLOR_END}     : ${COLOR_START}${DATA_COLOR_TAG}$GENRE${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Cast${COLOR_END}       : ${COLOR_START}${DATA_COLOR_TAG}$CAST${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Plot${COLOR_END}       :${COLOR_START}${DATA_COLOR_TAG}%s${COLOR_END}\n" "$PLOT"
-printf "${COLOR_START}${TITLE_COLOR_TAG}IMDB movie URL${COLOR_END} : ${COLOR_START}${LINK_COLOR_TAG}${URL}${COLOR_END}\n"
+printf "\n${COLOR_START}${TITLE_COLOR_TAG}IMDB movie URL${COLOR_END} : ${COLOR_START}${LINK_COLOR_TAG}${URL}${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Poster URL${COLOR_END} : ${COLOR_START}${LINK_COLOR_TAG}${POSTERURL}${COLOR_END}\n"
 if [ $PARSEABLE -eq 0 ] 
 then
@@ -258,7 +259,7 @@ then
 SIMILARTITLES="Nothing interesting here"
 fi
 printf "${COLOR_START}${DATA_COLOR_TAG}%s${COLOR_END}\n" "$SIMILARTITLES"
-printf "${COLOR_START}${TITLE_COLOR_TAG}Use above key words to know more about them${COLOR_END}\n"
+printf "\n${COLOR_START}${TITLE_COLOR_TAG}Use above key words to know more about them${COLOR_END}\n"
 else
 if [ ! -z "$SIMILARTITLES" ]
 then
