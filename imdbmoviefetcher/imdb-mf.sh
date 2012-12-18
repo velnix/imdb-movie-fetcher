@@ -136,8 +136,8 @@ h) cat << EOF
    -v : gives the version of the script
    -h : shows the help page
    -t [arg] : Pass the movie title as argument. It is recommended to quote the name as shown in the example below 
-   -p : Download movie poster 
-   -m : Output in machine-readable format, easy for subsequent parsing 
+   -p : Download movie poster. Use it with -t option.
+   -m : Output in machine-readable format, easy for subsequent parsing. Use it with -t option.
 
    Example : 
    $SCRIPT -t "cars"
@@ -165,7 +165,7 @@ v) printf "IMDB movie fetcher version %s.\nBugs, Feature requests etc : %s\n" "$
     ;;
 esac
 done
-[[ -z $MOVIE ]] && { printf "%s -h for more information\n" "$SCRIPT";exit 192;}
+[[ ${MOVIE:-unset} == 'unset' || -z $MOVIE ]] && { printf "Invalid input. Execute %s -h for more information\n" "$SCRIPT";exit 192;}
 #functions
 printnofound() {
 printf "There is no $1 command. Please install it\n"
@@ -248,7 +248,7 @@ printf "${COLOR_START}${TITLE_COLOR_TAG}Rating${COLOR_END}     : ${COLOR_START}$
 printf "${COLOR_START}${TITLE_COLOR_TAG}Director${COLOR_END}   : ${COLOR_START}${DATA_COLOR_TAG}$DIRECTOR${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Genres${COLOR_END}     : ${COLOR_START}${DATA_COLOR_TAG}$GENRE${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Cast${COLOR_END}       : ${COLOR_START}${DATA_COLOR_TAG}$CAST${COLOR_END}\n"
-printf "${COLOR_START}${TITLE_COLOR_TAG}Plot${COLOR_END}       :${COLOR_START}${DATA_COLOR_TAG}%s${COLOR_END}\n" "$PLOT"
+printf "${COLOR_START}${TITLE_COLOR_TAG}Plot${COLOR_END}       : ${COLOR_START}${DATA_COLOR_TAG}%s${COLOR_END}\n" "$PLOT"
 printf "\n${COLOR_START}${TITLE_COLOR_TAG}IMDB movie URL${COLOR_END} : ${COLOR_START}${LINK_COLOR_TAG}${URL}${COLOR_END}\n"
 printf "${COLOR_START}${TITLE_COLOR_TAG}Poster URL${COLOR_END} : ${COLOR_START}${LINK_COLOR_TAG}${POSTERURL}${COLOR_END}\n"
 if [ $PARSEABLE -eq 0 ] 
