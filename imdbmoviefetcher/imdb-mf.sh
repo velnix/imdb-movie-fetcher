@@ -8,6 +8,7 @@
 shopt -s -o nounset
 #Global variable declarations
 declare -rx MYSITE="http://prj.mutexes.org/projects/imdbmoviefetcher"
+declare -rx SOURCE_REPO="https://github.com/webofunni/imdb-movie-fetcher"
 declare -rx SCRIPT=${0##*/}
 declare -rx VERSION="4.2"
 declare URL
@@ -130,20 +131,21 @@ fi
 while getopts "$OPTSTRING" SWITCH;do
 case "$SWITCH" in
 h) cat << EOF
-   $SCRIPT [option] [arg]
+Usage: $SCRIPT [option] [arg]
+Get movie details without leaving bash
 
-   Options : 
+Options : 
    -v : gives the version of the script
    -h : shows the help page
    -t [arg] : Pass the movie title as argument. It is recommended to quote the name as shown in the example below 
    -p : Download movie poster. Use it with -t option.
    -m : Output in machine-readable format, easy for subsequent parsing. Use it with -t option.
 
-   Example : 
+Example : 
    $SCRIPT -t "cars"
  
-   Bugs, feature requests etc : $MYSITE
-
+Bugs, feature requests etc : $MYSITE
+Source code : $SOURCE_REPO   
 EOF
    exit 0
    ;;
@@ -154,7 +156,7 @@ p) POSTER="1"
 m) PARSEABLE="1"
    INEEDCOLOR="0"
    ;;
-v) printf "IMDB movie fetcher version %s.\nBugs, Feature requests etc : %s\n" "$VERSION" "$MYSITE"
+v) printf "IMDB movie fetcher version %s.\n\nBugs, Feature requests etc : %s\nSource code : %s\n" "$VERSION" "$MYSITE" "$SOURCE_REPO"
    exit 0
    ;;
 \?) printf "%s\n" "Invalid option. use $SCRIPT -h for more information"
