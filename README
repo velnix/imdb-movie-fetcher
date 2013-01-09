@@ -33,6 +33,7 @@ Usage
    -h : shows the help page
    -t [arg] : Pass the movie title as argument. It is recommended to quote the name as shown in the example below 
    -p : download movie poster 
+   -s : Do not show similar titles
    -m : output in machine-readable format, easy for subsequent parsing 
 
    Example : 
