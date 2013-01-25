@@ -287,7 +287,9 @@ then
   else
     if [ ! -z "$SIMILARTITLES" ]
     then
-      printf "${COLOR_START}${TITLE_COLOR_TAG}Similarities${COLOR_END} : ${COLOR_START}${LINK_COLOR_TAG}%s${COLOR_END}\n" "$SIMILARTITLES"    
+      printf "%s" "$SIMILARTITLES" > $TMPFILE.sim
+      cat $TMPFILE.sim|xargs -i echo "Similarities : "{}
+      rm -f $TMPFILE.sim > /dev/null   
     fi
   fi
 fi
