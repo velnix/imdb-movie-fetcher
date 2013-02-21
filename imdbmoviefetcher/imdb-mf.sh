@@ -216,6 +216,7 @@ then
   exit 192
 fi
 
+
 #Get IMDB URL for the film
 URL=`$EGREP -o "http://www.imdb.com/title/tt[0-9]*/" $TMPFILE | head -1`
 #Get similar titles
@@ -229,11 +230,14 @@ then
   exit 192
 fi
 
+cp $TMPFILE /tmp/zzz
+
 #extract data
-YEAR=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n '/<span.*>/,/<\/span>/p' | $SED '/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | $SED 's/&ndash;/ - /g'| $EGREP -o "[0-9][0-9][0-9][0-9]( - [0-9][0-9][0-9][0-9])*"`
+#YEAR=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n '/<span.*>/,/<\/span>/p' | $SED '/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | $SED 's/&ndash;/ - /g'| $EGREP -o "[0-9][0-9][0-9][0-9]( - [0-9][0-9][0-9][0-9])*"`
 #TITLE=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED '1d;$d;/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | head -1 | $SED "s/\&#x27\;/\'/g"`
 
 # update Feb 20 2013
+YEAR=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n '/<span class="nobr".*>/,/<\/span>/p' | $SED '/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | $SED 's/&ndash;/ - /g'|tr -d ' '`
 TITLE=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n 's/.*itemprop="name">//;s/<.*//p' |tr -s ' '|tr '\n' ' '`
 
 POSTERURL=`grep "Poster" $TMPFILE -A1|grep -o http.*\.jpg|cut -f 1 -d "_"`
