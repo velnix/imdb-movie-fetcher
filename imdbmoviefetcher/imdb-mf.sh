@@ -230,8 +230,6 @@ then
   exit 192
 fi
 
-cp $TMPFILE /tmp/zzz
-
 #extract data
 #YEAR=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n '/<span.*>/,/<\/span>/p' | $SED '/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | $SED 's/&ndash;/ - /g'| $EGREP -o "[0-9][0-9][0-9][0-9]( - [0-9][0-9][0-9][0-9])*"`
 #TITLE=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED '1d;$d;/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | head -1 | $SED "s/\&#x27\;/\'/g"`
