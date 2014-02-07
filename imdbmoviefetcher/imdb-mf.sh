@@ -259,9 +259,9 @@ PLOT=`lynx --dump $PLOTFILE | sed 's/^  *//g'`
 #CAST=`$SED -n '/.*Star[s]*:.*/,/<\/div>/{ s/<[^>]*>//g;s/Stars://g;p }' $TMPFILE | grep -v "See full cast and crew" | $SED -n '/^ *$/d;p' | tr '\n' ' ' | $SED 's/<[^>]*>//g;s/|//g'`
 
 # update Feb 20 2013
-DIRECTOR=`$SED -n '/ *tt_ov_dr.*/,/<\/div>/{p;}' $TMPFILE|$SED -n 's/.*itemprop="name">//;s/<.*//p'|sort -u|tr -s ' '|tr '\n' ','|sed 's/ ,//g;s/^,//;s/,$//'`
-GENRE=`grep "ref_=tt_ov_inf" $TMPFILE| grep genre|$SED -n 's/.*itemprop="genre">//;s/<.*//p'|sort -u|tr '\n' ','|sed 's/^,//;s/,$//'`
-CAST=`$SED -n '/ *tt_ov_st.*/,/<\/div>/{p;}' $TMPFILE|$SED -n 's/.*itemprop="name">//;s/<.*//p'|sort -u|tr -s ' '|tr '\n' ','|sed 's/ ,//g;s/^,//;s/,$//'`
+DIRECTOR=`$SED -n '/ *tt_ov_dr.*/,/<\/div>/{p;}' $TMPFILE|$SED -n 's/.*itemprop="name">//;s/<.*//p'|uniq|tr -s ' '|tr '\n' ','|sed 's/ ,//g;s/^,//;s/,$//'`
+GENRE=`grep "ref_=tt_ov_inf" $TMPFILE| grep genre|$SED -n 's/.*itemprop="genre">//;s/<.*//p'|uniq|tr '\n' ','|sed 's/^,//;s/,$//'`
+CAST=`$SED -n '/ *tt_ov_st.*/,/<\/div>/{p;}' $TMPFILE|$SED -n 's/.*itemprop="name">//;s/<.*//p'|uniq|tr -s ' '|tr '\n' ','|sed 's/ ,//g;s/^,//;s/,$//'`
 
 if [ $INEEDCOLOR -eq 1 ] 
 then
