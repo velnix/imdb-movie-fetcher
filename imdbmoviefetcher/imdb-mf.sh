@@ -234,9 +234,8 @@ fi
 #YEAR=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n '/<span.*>/,/<\/span>/p' | $SED '/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | $SED 's/&ndash;/ - /g'| $EGREP -o "[0-9][0-9][0-9][0-9]( - [0-9][0-9][0-9][0-9])*"`
 #TITLE=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED '1d;$d;/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | head -1 | $SED "s/\&#x27\;/\'/g"`
 
-# update Feb 20 2013
-YEAR=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n '/<span class="nobr".*>/,/<\/span>/p' | $SED '/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | $SED 's/&ndash;/ - /g'|tr -d ' '`
-TITLE=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n 's/.*itemprop="name">//;s/<.*//p' |tr -s ' '|tr '\n' ' '`
+YEAR=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n '/<span class="nobr".*>/,/<\/span>/p' | $SED '/^$/d;s/<[^>]*>//g;s/(//g;s/)//g' | $SED 's/&ndash;/ - /g;/[^"]"/d;s/>//g'|tr -d ' '`
+TITLE=`cat $TMPFILE | $SED -n '/<h1.*>/,/<\/h1>/p' | $SED -n 's/.*itemprop="name">//;s/<.*//p' | head -1 | tr -s ' ' | tr '\n' ' '`
 
 POSTERURL=`grep "Poster" $TMPFILE -A1|grep -o http.*\.jpg|cut -f 1 -d "_"`
 POSTERURL=${POSTERURL}jpg
@@ -251,17 +250,16 @@ RATING=`$SED -n '/<span itemprop="ratingValue">/{ s/<[^>]*>//g;p;}' $TMPFILE  | 
 
 #Get the plot in a html file
 #$SED -n '/<h1.*>/,/<\/p>/p' $TMPFILE | $SED -n '/<p>/,/<\/p>/{ s/<[^>]*>//g;p;}' | $SED 's/See full summary.*//g' > $PLOTFILE 
-$SED -n '/.*<p itemprop="description">/,/<\/p>/p' $TMPFILE | $SED -n 's/.*itemprop="description">//;s/<.*//p' > $PLOTFILE 
+$SED -n '/.*<p itemprop="description">/,/<\/p>/p' $TMPFILE | $SED -n 's/.*itemprop="description">//;s/<[^>]*>//pg' > $PLOTFILE 
 PLOT=`lynx --dump $PLOTFILE | sed 's/^  *//g'`
 
 #DIRECTOR=`$SED -n '/ *Director[s]*:.*/,/ *Writer[s]*:.*/{p;}' $TMPFILE | $SED -n '/ *Director[s]*:.*/,/ *Star[s]*:.*/{p;}' | $SED '1d;$d' | tr '\n' ' ' | $SED 's/<[^>]*>//g;s/^ *//g;s/ *$//g;s/&nbsp;&raquo;//g'`
 #GENRE=`$SED -n '/genre/p' $TMPFILE | $EGREP -o '<a  *.*href="/genre/[a-zA-Z][a-z]*"[^>]*>[^<]*</a>' | $SED 's/<[^>]*>//g;s/&nbsp\;//g;s/ *Genres *[0-9][0-9]* *min-//g;s/|/,/g' | $SED 's/[gG]enres//g;s/^  *//g' | uniq | head -1`
 #CAST=`$SED -n '/.*Star[s]*:.*/,/<\/div>/{ s/<[^>]*>//g;s/Stars://g;p }' $TMPFILE | grep -v "See full cast and crew" | $SED -n '/^ *$/d;p' | tr '\n' ' ' | $SED 's/<[^>]*>//g;s/|//g'`
 
-# update Feb 20 2013
-DIRECTOR=`$SED -n '/ *tt_ov_dr.*/,/<\/div>/{p;}' $TMPFILE|$SED -n 's/.*itemprop="name">//;s/<.*//p'|uniq|tr -s ' '|tr '\n' ','|sed 's/ ,//g;s/^,//;s/,$//'`
+DIRECTOR=`$SED -n '/ *itemprop="director.*/,/<\/div>/{p;}' $TMPFILE|$SED -n 's/.*itemprop="name">//;s/<.*//p'|uniq|tr -s ' '|tr '\n' ','|sed 's/ ,//g;s/^,//;s/,$//'`
 GENRE=`grep "ref_=tt_ov_inf" $TMPFILE| grep genre|$SED -n 's/.*itemprop="genre">//;s/<.*//p'|uniq|tr '\n' ','|sed 's/^,//;s/,$//'`
-CAST=`$SED -n '/ *tt_ov_st.*/,/<\/div>/{p;}' $TMPFILE|$SED -n 's/.*itemprop="name">//;s/<.*//p'|uniq|tr -s ' '|tr '\n' ','|sed 's/ ,//g;s/^,//;s/,$//'`
+CAST=`$SED -n '/ *tt_ov_st.*/,/tt_ov_st_sm/{p;}' $TMPFILE|$SED -n 's/.*itemprop="name">//;s/<.*//p'|uniq|tr -s ' '|tr '\n' ','|sed 's/ ,//g;s/,,/,/g;s/^,//;s/,$//'`
 
 if [ $INEEDCOLOR -eq 1 ] 
 then
