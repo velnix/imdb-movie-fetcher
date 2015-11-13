@@ -1,43 +1,6 @@
-IMDB movie fetcher version 4.2
+IMDB movie fetcher
 =====================
 
 Command line tool to search and get details about movies. 
 
-Installation instruction 
-=========================
-1. Download the file
-2. untar it 
-
-#tar zxvf imdbmoviefetcher-v$ver.tar.gz
-
-Replace $ver with version number 
-
-EG : 
-
-tar zxvf imdbmoviefetcher-v3.tar.gz
-
-3. Execute the installer
-
-#cd imdbmoviefetcher
-#sudo ./installer.sh
-
-You need to become root, if the user do not have sudo access.
-
-Usage
-=========
-
-   imdb-mf [option] [arg]
-
-   Options : 
-   -v : gives the version of the script
-   -h : shows the help page
-   -t [arg] : Pass the movie title as argument. It is recommended to quote the name as shown in the example below 
-   -p : download movie poster 
-   -s : Do not show similar titles
-   -m : output in machine-readable format, easy for subsequent parsing 
-
-   Example : 
-   imdb-mf -t "starship troopers"
- 
-   Send your feedback to unnikrishnan.a@gmail.com
-   Visit: https://www.velnix.com/projects/
+Visit: https://www.velnix.com/projects/
