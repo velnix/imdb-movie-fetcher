@@ -1,3 +1,16 @@
-Go to : 
+Project site : https://www.velnix.com/projects/
+Source Code : https://github.com/velnix/imdb-movie-fetcher
 
-http://www.mutexes.org/2011/06/06/imdb-movie-fetcher-version-4/
+Version 5 change log : 
+
+Contributed by : Zarko
+
+1. As I had problems with google rejecting searches from the script after a while, I added support for duckduckgo. The script actually detects this and switches to duckduckgo automatically
+
+2. I also needed original movie title (if not in english), so I added parsing for that too
+
+3. Added a movie year as an optional argument, it gives much better results when the movie name isn't unique through the years
+
+4. Also added the parameters to enter imdb ID directly and to select google or duckduckgo
+
+5. Fixed GENRE searching, as it gave me blank results
